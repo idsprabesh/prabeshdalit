@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prabesh Bhat | Information Systems Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #003366;
+            --accent: #25D366;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            background: var(--dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-whatsapp {
+            background: var(--accent);
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        .social-links {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            color: var(--dark);
+            margin: 0 15px;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--primary);
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                padding: 0.5rem 0;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            padding: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+        
+        body.dark-mode section,
+        body.dark-mode .project-card,
+        body.dark-mode .timeline-content,
+        body.dark-mode .skill-item {
+            background-color: #1e1e1e;
+            color: #f1f1f1;
+        }
+        
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #f1f1f1;
+        }
+        
+        body.dark-mode .skill-item:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon" id="darkModeIcon"></i>
+    </div>
+    
+    <header>
+        <img src="prabesh.jpg" alt="Prabesh Bhat" class="profile-pic">
+        <h1>Prabesh Bhat</h1>
+        <p>Information Systems Student at St. Cloud State University</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/prabesh.bhat/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <section id="home" class="fade-in">
+        <h2>Welcome to My Personal Website</h2>
+        <p>I'm a passionate Information Systems student with interests in database management, marketing analytics, and technology solutions. Currently in my third year at St. Cloud State University, I'm building a strong foundation in both technical and business disciplines to create impactful digital solutions.</p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="#contact" class="btn">Contact Me</a>
+            <a href="#projects" class="btn" style="margin-left: 1rem;">View My Work</a>
+        </div>
+    </section>
+    
+    <section id="about" class="fade-in delay-1">
+        <h2>About Me</h2>
+        <p>Hi! I'm <strong>Prabesh Bhat</strong>, a passionate and ambitious third-year student at <strong>St. Cloud State University</strong>, majoring in <strong>Information Systems</strong>. As a tech enthusiast with a strong foundation in business and analytics, I am driven by curiosity and the desire to use technology to solve real-world problems.</p>
+        
+        <h3 style="margin-top: 2rem;">My Academic Journey</h3>
+        <p>At St. Cloud State University, I've cultivated a diverse academic background that spans <strong>Information Systems</strong>, <strong>Marketing</strong>, <strong>Macroeconomics</strong>, <strong>Statistics</strong>, and <strong>Database Management</strong>. My coursework has equipped me with both the technical know-how and business acumen to thrive in dynamic, data-driven environments.</p>
+        
+        <h3 style="margin-top: 2rem;">Personal Interests</h3>
+        <p>Outside the classroom, I'm a well-rounded individual who enjoys balance. I'm a <strong>huge football fan</strong> and an enthusiastic supporter of <strong>Real Madrid</strong>—Hala Madrid! Whether it's watching a high-stakes Champions League match or playing a casual game with friends, football helps me recharge and stay inspired.</p>
+        <p>In my downtime, I also love watching <strong>prank videos</strong>—they remind me not to take life too seriously and that a good laugh can go a long way. My ability to balance focus and fun helps me bring positive energy wherever I go.</p>
+        
+        <h3 style="margin-top: 2rem;">Career Goals</h3>
+        <p>Looking ahead, I aim to build a successful career in the <strong>tech industry</strong>, particularly in roles that combine systems design, data analytics, and user-centered solutions. I'm especially interested in companies like <strong>Amazon</strong>, where innovation, customer obsession, and cutting-edge technologies drive success.</p>
+        <p>Long-term, I aspire to work on projects that make technology more accessible and impactful—whether through smart systems, insightful data applications, or seamless digital experiences.</p>
+    </section>
+    
+    <section id="education" class="fade-in delay-1">
+        <h2>Education & Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>St. Cloud State University</h3>
+                    <p><strong>Bachelor of Science in Information Systems</strong></p>
+                    <p>2020 - Present</p>
+                    <p>Major GPA: 3.5</p>
+                    <p>Relevant coursework: Database Management, Marketing Analytics, Statistics, Macroeconomics</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Academic Projects</h3>
+                    <p><strong>Nutrition Tracker Database</strong></p>
+                    <p>Designed in Microsoft Access with tables, queries, and reports to track nutritional goals and participant data.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>Retail Marketing Analysis</h3>
+                    <p>Comparative study of Walmart, ALDI, and Coborn's social media strategies with focus on Facebook engagement.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Meet the Firms Event</h3>
+                    <p>Networked with potential employers including Amazon, learning about opportunities in tech industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="fade-in delay-2">
+        <h2>My Projects</h2>
+        <div class="project-card">
+            <h3>Nutrition Tracker Program</h3>
+            <p><strong>Microsoft Access Database</strong></p>
+            <p>Designed a comprehensive relational database system for tracking nutritional goals and participant data. The project involved:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>Creating normalized tables with proper relationships</li>
+                <li>Developing complex queries for data analysis</li>
+                <li>Generating detailed reports with calculated fields</li>
+                <li>Writing technical memos explaining system functionality</li>
+            </ul>
+        </div>
+        
+        <div class="project-card">
+            <h3>Retail Marketing Analysis</h3>
+            <p><strong>Comparative Study of Walmart, ALDI, and Coborn's</strong></p>
+            <p>Created a 10-12 slide PowerPoint presentation analyzing the social media strategies of major retailers compared to a local store (Coborn's). Key aspects included:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>Detailed examination of Coborn's Facebook strategy for local engagement</li>
+                <li>Comparison of UI/UX elements across e-commerce platforms</li>
+                <li>Personalization techniques used in digital marketing</li>
+                <li>Actionable recommendations based on MIS principles</li>
+            </ul>
+        </div>
+        
+        <div class="project-card">
+            <h3>Multiple Regression Analysis</h3>
+            <p><strong>Statistical Data Analysis</strong></p>
+            <p>Conducted a multiple regression analysis using classroom-generated data to evaluate the significance and strength of variables on an outcome. This project enhanced my:</p>
+            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                <li>Understanding of descriptive and inferential statistics</li>
+                <li>Ability to interpret Z-scores and probability distributions</li>
+                <li>Skills in determining correlation vs. causation</li>
+                <li>Data visualization and reporting capabilities</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="skills" class="fade-in delay-2">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">Information Systems</div>
+            <div class="skill-item">Database Management</div>
+            <div class="skill-item">Microsoft Access</div>
+            <div class="skill-item">Marketing Analytics</div>
+            <div class="skill-item">Statistics</div>
+            <div class="skill-item">Data Analysis</div>
+            <div class="skill-item">Python (Learning)</div>
+            <div class="skill-item">Microsoft Office</div>
+            <div class="skill-item">Business Communication</div>
+            <div class="skill-item">Macroeconomics</div>
+        </div>
+    </section>
+    
+    <section id="contact" class="fade-in delay-3">
+        <h2>Get In Touch</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">I'm always open to discussing new opportunities, collaborations, or just chatting about technology and football! Feel free to reach out through any of these channels:</p>
+        
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="https://wa.me/13204207447" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Message Me on WhatsApp
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://www.facebook.com/prabesh.bhat/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="mailto:your-email@example.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <p><i class="fas fa-phone-alt"></i> +1 (320) 420-7447</p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; <span id="year"></span> Prabesh Bhat. All rights reserved.</p>
+    </footer>
+    
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/13204207447" class="floating-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        
+        fadeElements.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        let darkMode = false;
+        
+        darkModeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark-mode');
+            
+            if (darkMode) {
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+            } else {
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // Typewriter effect for fun (optional)
+        const typewriterElements = document.querySelectorAll('.typewriter');
+        
+        typewriterElements.forEach(element => {
+            const text = element.textContent;
+            element.textContent = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 50);
+        });
+    </script>
+</body>
+</html>
